@@ -9,10 +9,15 @@
 	<body class="grey-bg">
 		<%- include ('nav.ejs') %>
 
-		<form class="form-box" action="/add-post" method="POST">
+		<form
+			class="form-box"
+			action="/add-post"
+			method="POST"
+			enctype="multipart/form-data">
 			<h4>New Post</h4>
 			<input name="title" />
 			<input name="content" />
+			<input name="img1" type="file" accept="image/*" />
 			<button type="submit">Submit</button>
 		</form>
 	</body>
