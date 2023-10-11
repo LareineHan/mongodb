@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link href="/main.css" rel="stylesheet" />
+	</head>
+	<body class="grey-bg">
+		<%- include ('nav.ejs') %>
+
+		<form class="form-box" action="/register" method="POST">
+			<h4>Sign Up</h4>
+			<p>
+				Username
+				<input class="username" name="username" placeholder="username" />
+			</p>
+			<p>
+				Password
+				<input
+					name="password"
+					type="password"
+					placeholder="create a password" />
+				<input
+					name="password"
+					type="password"
+					placeholder="confirm the password" />
+			</p>
+			<button type="submit">Submit</button>
+		</form>
+	</body>
+</html>

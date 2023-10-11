@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link href="/main.css" rel="stylesheet" />
+	</head>
+	<body class="grey-bg">
+        <%- include ('nav.ejs') %>
+		<!-- <%= JSON.stringify(posts) %> -->
+		<div class="white-bg">
+			<% for (let i=0; i<posts.length; i++) { %>
+			<div class="list-box">
+				<h4><a href="/detail/<%= posts[i]._id %>"><%= posts[i].title %></a></h4>
+                <div class="edit-button"><a href ="/edit/<%= posts[i]._id %>"><button>Edit</button></a></div>
+                <span class="delete" data-id="<%= posts[i]._id %>">🗑️</span>
+
+				<p><%= posts[i].content %></p>
+			</div>
+			<% } %>
+		</div>
+
+		<% if (posts.length >= 5) { %>
+			<a href="/list/next/<%= posts[posts.length-1]._id %>">Next</a>
+		<% } %>
+		
+		 
+
+<script>
+    document.querySelectorAll('.delete').forEach((item) => { // delete 클래스를 가진 모든 요소를 찾아서 forEach로 반복한다.
+    item.addEventListener('click', (e) => {
+        const id = e.target.getAttribute('data-id'); // id는 .delete가 클래스인 스팬의 data-id인데, data-는 생략하고 id만 가져온다.
+        fetch(`/delete/${id}`, {
+            method: 'DELETE', // delete 메소드를 사용한다. body와 headers는 필요없다. 
+        })
+        .then((res) => res.json()) // 그리고 delete가 성공하면 json으로 변환한다.
+        .then((data) => {
+            if (data.success) {
+                window.location.reload();
+            } // 그리고 성공하면 페이지를 새로고침한다.
+        })
+		.then(console.log(id));
+    });
+});
+
+
+
+    </script>  
+	</body>
+</html>
